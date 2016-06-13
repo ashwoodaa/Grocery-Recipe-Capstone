@@ -10,7 +10,7 @@ namespace Grocery_Recipe_Capstone.Models
         public int FavoritedRecipeId { get; set; }
         public int FoodEaterId { get; set; }
         public int RecipeId { get; set; }
-        public FavoritedRecipe FavoritedRecipes { get; set; }
-        public Recipe Recipes { get; set; }
+        public FoodEater FoodEater { get; set; }
+        public List<Recipe> Recipe { get; set; }
     }
 }

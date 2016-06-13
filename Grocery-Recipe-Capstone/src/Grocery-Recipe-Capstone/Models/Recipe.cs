@@ -11,6 +11,7 @@ namespace Grocery_Recipe_Capstone.Models
         public string Name { get; set; }
         public string Type { get; set; }
         public string ProcessToCook { get; set; }
+        public FavoritedRecipe FavoritedRecipe { get; set; }
         public List<GroceryList> GroceryList { get; set; }
     }
 }

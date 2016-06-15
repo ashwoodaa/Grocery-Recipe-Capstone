@@ -15,7 +15,7 @@ namespace Grocery_Recipe_Capstone.Models
         public DbSet<Ingredient> Ingredient { get; set; }
         public DbSet<FavoritedRecipe> FavoritedRecipe { get; set; }
         public DbSet<FoodEater> FoodEater { get; set; }
-        public DbSet<GroceryList> GroceryList { get; set; }
+        public DbSet<RecipeIngredient> RecipeIngredient { get; set; }
         public DbSet<Recipe> Recipe { get; set; }
     }
 }

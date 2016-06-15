@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Grocery_Recipe_Capstone.Models
 {
-    public class FavoritedRecipe
+    public class RecipeIngredient
     {
         [Key]
-        public int FavoritedRecipeId { get; set; }
-        public int FoodEaterId { get; set; }
+        public int RecipeIngredientId { get; set; }
         public int RecipeId { get; set; }
-        public FoodEater FoodEater { get; set; }
+        public int IngredientId { get; set; }
         public Recipe Recipe { get; set; }
+        public Ingredient Ingredient { get; set; }
     }
 }

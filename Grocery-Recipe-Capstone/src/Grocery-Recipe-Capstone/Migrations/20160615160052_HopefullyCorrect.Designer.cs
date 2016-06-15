@@ -8,9 +8,10 @@ using Grocery_Recipe_Capstone.Models;
 namespace GroceryRecipeCapstone.Migrations
 {
     [DbContext(typeof(GroceryRecipeContext))]
-    partial class GroceryRecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20160615160052_HopefullyCorrect")]
+    partial class HopefullyCorrect
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")
@@ -28,8 +29,6 @@ namespace GroceryRecipeCapstone.Migrations
                     b.HasKey("FavoritedRecipeId");
 
                     b.HasIndex("FoodEaterId");
-
-                    b.HasIndex("RecipeId");
 
                     b.ToTable("FavoritedRecipe");
                 });
@@ -52,6 +51,18 @@ namespace GroceryRecipeCapstone.Migrations
                     b.ToTable("FoodEater");
                 });
 
+            modelBuilder.Entity("Grocery_Recipe_Capstone.Models.GroceryList", b =>
+                {
+                    b.Property<int>("GroceryListId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("IngredientId");
+
+                    b.HasKey("GroceryListId");
+
+                    b.ToTable("GroceryList");
+                });
+
             modelBuilder.Entity("Grocery_Recipe_Capstone.Models.Ingredient", b =>
                 {
                     b.Property<int>("IngredientId")
@@ -59,9 +70,15 @@ namespace GroceryRecipeCapstone.Migrations
 
                     b.Property<string>("Amount");
 
+                    b.Property<int?>("GroceryListId");
+
                     b.Property<string>("Name");
 
+                    b.Property<int>("RecipeId");
+
                     b.HasKey("IngredientId");
+
+                    b.HasIndex("GroceryListId");
 
                     b.ToTable("Ingredient");
                 });
@@ -71,6 +88,10 @@ namespace GroceryRecipeCapstone.Migrations
                     b.Property<int>("RecipeId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("FavoritedRecipeId");
+
+                    b.Property<int?>("IngredientId");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("ProcessToCook");
@@ -79,25 +100,11 @@ namespace GroceryRecipeCapstone.Migrations
 
                     b.HasKey("RecipeId");
 
-                    b.ToTable("Recipe");
-                });
-
-            modelBuilder.Entity("Grocery_Recipe_Capstone.Models.RecipeIngredient", b =>
-                {
-                    b.Property<int>("RecipeIngredientId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("IngredientId");
-
-                    b.Property<int>("RecipeId");
-
-                    b.HasKey("RecipeIngredientId");
+                    b.HasIndex("FavoritedRecipeId");
 
                     b.HasIndex("IngredientId");
 
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("RecipeIngredient");
+                    b.ToTable("Recipe");
                 });
 
             modelBuilder.Entity("Grocery_Recipe_Capstone.Models.FavoritedRecipe", b =>
@@ -106,24 +113,24 @@ namespace GroceryRecipeCapstone.Migrations
                         .WithMany()
                         .HasForeignKey("FoodEaterId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Grocery_Recipe_Capstone.Models.Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Grocery_Recipe_Capstone.Models.RecipeIngredient", b =>
+            modelBuilder.Entity("Grocery_Recipe_Capstone.Models.Ingredient", b =>
                 {
+                    b.HasOne("Grocery_Recipe_Capstone.Models.GroceryList")
+                        .WithMany()
+                        .HasForeignKey("GroceryListId");
+                });
+
+            modelBuilder.Entity("Grocery_Recipe_Capstone.Models.Recipe", b =>
+                {
+                    b.HasOne("Grocery_Recipe_Capstone.Models.FavoritedRecipe")
+                        .WithMany()
+                        .HasForeignKey("FavoritedRecipeId");
+
                     b.HasOne("Grocery_Recipe_Capstone.Models.Ingredient")
                         .WithMany()
-                        .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Grocery_Recipe_Capstone.Models.Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("IngredientId");
                 });
         }
     }

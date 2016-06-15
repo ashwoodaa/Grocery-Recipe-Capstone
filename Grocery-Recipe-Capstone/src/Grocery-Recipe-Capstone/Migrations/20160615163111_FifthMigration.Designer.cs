@@ -8,9 +8,10 @@ using Grocery_Recipe_Capstone.Models;
 namespace GroceryRecipeCapstone.Migrations
 {
     [DbContext(typeof(GroceryRecipeContext))]
-    partial class GroceryRecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20160615163111_FifthMigration")]
+    partial class FifthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")

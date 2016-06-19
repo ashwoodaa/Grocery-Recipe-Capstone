@@ -31,7 +31,7 @@ namespace Grocery_Recipe_Capstone
         {
             var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
             services.AddDbContext<GroceryRecipeContext>(options => options.UseSqlServer(connection));
-            //IServiceCollection.AddMvc();
+            IServiceCollection.AddMvc();
 
         }
 

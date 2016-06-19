@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using Grocery_Recipe_Capstone.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,36 +23,152 @@ namespace Grocery_Recipe_Capstone.Controllers
         {
             _context = context;
         }
+
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] int? RecipeId)
         {
-            return new string[] { "value1", "value2" };
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            IQueryable<RecipeIngredient> RecipeIngredients = from RecipeIngredient in _context.RecipeIngredient
+                                                             select new RecipeIngredient
+                                                             {
+                                                                 RecipeIngredientId = RecipeIngredient.RecipeIngredientId,
+                                                                 RecipeId = RecipeIngredient.RecipeId,
+                                                                 IngredientId = RecipeIngredient.IngredientId
+                                                              };
+            if (RecipeId != null)
+            {
+                RecipeIngredients = RecipeIngredients.Where(g => g.RecipeId == RecipeId);
+            }
+            if (RecipeIngredients == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(RecipeIngredients);
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetRecipeIngredient")]
+        public IActionResult Get(int id)
         {
-            return "value";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            RecipeIngredient recipeIngredient = _context.RecipeIngredient.Single(r => r.RecipeIngredientId == id);
+
+            if (recipeIngredient == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(recipeIngredient);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody] RecipeIngredient recipeIngredient)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var existingRecipeIngredient = from g in _context.RecipeIngredient
+                                           where g.RecipeId == recipeIngredient.RecipeId
+                                           select g;
+
+            if (existingRecipeIngredient.Count<RecipeIngredient>() > 0)
+            {
+                return new StatusCodeResult(StatusCodes.Status409Conflict);
+            }
+
+            _context.RecipeIngredient.Add(recipeIngredient);
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (RecipeIngredientExists(recipeIngredient.RecipeIngredientId))
+                {
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("GetRecipeIngredient", new { id = recipeIngredient.RecipeIngredientId }, recipeIngredient);
         }
+
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody] RecipeIngredient recipeIngredient)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != recipeIngredient.RecipeIngredientId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(recipeIngredient).State = EntityState.Modified;
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RecipeExists(recipeIngredient.RecipeIngredientId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            RecipeIngredient recipeIngredient = _context.RecipeIngredient.Single(m => m.RecipeIngredientId == id);
+            if (recipeIngredient == null)
+            {
+                return NotFound();
+            }
+
+            _context.RecipeIngredient.Remove(recipeIngredient);
+            _context.SaveChanges();
+
+            return Ok(recipeIngredient);
+        }
+
+        private bool RecipeIngredientExists(int id)
+        {
+            return _context.RecipeIngredient.Count(e => e.RecipeIngredientId == id) > 0;
         }
     }
 }

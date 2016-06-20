@@ -132,7 +132,7 @@ namespace Grocery_Recipe_Capstone.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecipeExists(recipeIngredient.RecipeIngredientId))
+                if (!RecipeIngredientExists(recipeIngredient.RecipeIngredientId))
                 {
                     return NotFound();
                 }

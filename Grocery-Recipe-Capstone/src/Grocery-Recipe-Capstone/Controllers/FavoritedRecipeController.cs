@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Grocery_Recipe_Capstone.Controllers
 {
     [Produces("application/json")]
-    [EnableCors("AllowSpecificOrigin")]
+    [EnableCors("AllowDevelopmentEnvironment")]
     [Route("api/FavoritedRecipe")]
     public class FavoritedRecipeController : Controller
     {

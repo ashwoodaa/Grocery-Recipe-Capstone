@@ -1,9 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>GlutenFreeRecipe</title>
+	<link rel="stylesheet" src="styles/main.css" href="styles/main.css">
 </head>
-<body>
+<body ng-app="GroceryApp">
 
+	<nav>
+		<h1 class="nav-header">Gamer Review</h1>
+
+		<ul>
+    		<li><a href="#/">Search Games</a></li>
+    		<li><a href="/#/grocerylist">Your Grocery List</a></li>
+   			<li><a href="/#/favoritedRecipes">Your Favorited Recipes</a></li>
+    		<li class="align-right"><a href="/#/logout">Logout</a></li>
+        </ul>
+	</nav>
+
+	<div class="dat-view" ng-view>
+		
+	</div>
+
+
+	<script src="lib/bower_components/angular/angular.min.js"></script>
+    <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
+
+    <script src="app/app.js"></script>
+	<script src="app/factories/AuthFactory.js"></script>
+	<script src="app/factories/Grocery.js"></script>
+	<script src="app/factories/Ingredient.js"></script>
+	<script src="app/factories/FoodEater.js"></script>
+	<script src="app/factories/Recipe.js"></script>
+	<script src="app/factories/RecipeIngredient.js"></script>
+	<script src="app/controllers/createRecipeController.js"></script>
+	<script src="app/controllers/loginController.js"></script>
+	<script src="app/controllers/favoritedRecipesController.js"></script>
+	<script src="app/controllers/groceryListController.js"></script>
+	<script src="app/controllers/recipesController.js"></script>
 </body>
 </html>

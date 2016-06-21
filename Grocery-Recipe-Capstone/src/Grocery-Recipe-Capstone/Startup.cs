@@ -32,7 +32,14 @@ namespace Grocery_Recipe_Capstone
             var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
             services.AddDbContext<GroceryRecipeContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
-            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowDevelopmentEnvironment",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Grocery_Recipe_Capstone.Controllers
 {
     [Produces("application/json")]
-    [EnableCors("AllowAll")]
+    [EnableCors("AllowDevelopmentEnvironment")]
     [Route("api/FoodEater")]
     public class FoodEaterController : Controller
     {
@@ -74,7 +74,7 @@ namespace Grocery_Recipe_Capstone.Controllers
 
         // POST api/values
         [Route("api/FoodEater/post")]
-        [EnableCors("AllowAll")]
+        [EnableCors("AllowDevelopmentEnvironment")]
         [HttpPost(Name = "PostitPlease")]
         public IActionResult Post([FromBody] FoodEater foodeater)
         {

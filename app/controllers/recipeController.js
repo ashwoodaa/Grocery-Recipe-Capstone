@@ -70,8 +70,8 @@ GroceryRecipe.controller("recipeController", [
 
     },
     // pulls the editrecipe function from factory and re-hides the editing fields
-    $scope.editrecipe = function(recipe) {
-      recipeFactory.editrecipe(recipe);
+    $scope.editRecipe = function(recipe) {
+      recipeFactory.editRecipe(recipe);
       return $scope.editrecipeVisible = false;
     },
     // pulls the delete function with "recipe" being passed to only delete one

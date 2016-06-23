@@ -1,0 +1,13 @@
+<section class="create-recipe-form">
+	<div>
+	<h3>Name of Recipe</h3>
+	<input type="text" autofocus="true" ng-model="recipe.Name">
+
+	<h3>Description of Recipe (how to actually cook the meal)</h3>
+	<input type="text" ng-model="recipe.ProcessToCook">
+
+	<h3>What type of food is the recipe?(Breakfast, Main dish, Party, Side, Soup/Stew, or Sweet stuff)</h3>
+	<input type="text-box" ng-model="recipe.Type">
+	</div>
+	<button class="create-Recipe-btn" ng-click="addRecipe()">Create new Recipe</button>
+</section>	

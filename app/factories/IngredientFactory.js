@@ -17,10 +17,10 @@ GroceryRecipe.factory("ingredientFactory", function ($q, $http) {
 
 		
 
-		deleteingredient (ingredient) {
+		deleteIngredient (ingredient) {
 			$http.delete(`http://localhost:64540/api/ingredient/${ingredient.IngredientId}`)
 					.then(function () {
-        	$location.url("/")
+        	$location.url("/groceryList")
         });
 		},
 

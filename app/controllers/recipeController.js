@@ -75,9 +75,9 @@ GroceryRecipe.controller("recipeController", [
       return $scope.editrecipeVisible = false;
     },
     // pulls the delete function with "recipe" being passed to only delete one
-    $scope.deleterecipe = function (recipe) {
+    $scope.deleteRecipe = function (recipe) {
       console.log("search ctrl recipe", recipe );
-      recipeFactory.deleterecipe(recipe);
+      recipeFactory.deleteRecipe(recipe);
       $route.reload();
     },
     // adds a ingredient and saves the recipe id into the ingredient firebase

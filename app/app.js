@@ -42,7 +42,7 @@ GroceryRecipe.config(["$routeProvider",
       	// resolve: {isAuth}
       }). 
       when("/groceryList", {
-      	templateUrl: "partials/grocreyList.html",
+      	templateUrl: "partials/groceryList.html",
       	controller: "groceryListController",
       	// resolve: {isAuth}
       }).

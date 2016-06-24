@@ -146,7 +146,7 @@ namespace Grocery_Recipe_Capstone.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteIngredient")]
         public IActionResult Delete(int id)
         {
             if (!ModelState.IsValid)

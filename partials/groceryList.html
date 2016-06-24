@@ -1,0 +1,16 @@
+<div>
+	<h2>This is your list so far! Feel free to add or delete items as needed.<h2>
+
+	<h3>Name of ingredient</h3>
+	<input type="text" autofocus="true" ng-model="ingredient.Name">
+
+	<h3>Amount of ingredient</h3>
+	<input type="text" ng-model="ingredient.Amount">
+	<button class="addingredientbtn" ng-click="addingredient(item)">Add ingredient</button>
+
+	<section class="grocerylist" ng-repeat="item in grocerylist">
+		<h3>Name: {{ item.Name }}</h3>
+		<h4 class="description">Amount: {{ item.Amount }}</h4>
+		<button class="deleteIngredientbtn" ng-click="deleteIngredient(item)">Delete ingredient</button>
+	</section>
+</div>

@@ -8,7 +8,7 @@
 		<h3>Name: {{ recipe.Name }}</h3>
 		<h4 class="description">Description: {{ recipe.ProcessToCook }}</h4>
 		<h4>Type of Recipe:{{ recipe.Type }}</h4>
-		<button class="editrecipebtn" ng-click="showEditrecipe(recipe)">Edit recipe</button>
+<!-- 		<button class="editrecipebtn" ng-click="showEditrecipe(recipe)">Edit recipe</button>
 		<div class="edit-form" ng-if="editrecipeVisible===true">
 			<section>
 				<h3>Name of recipe</h3>
@@ -17,15 +17,15 @@
 				<h3>Description of how to cook recipe</h3>
 				<input type="text" ng-model="recipe.ProcessToCook">
 
-				<h3>What type of food is the recipe?(Main dish, side, sweet stuff, etc.)</h3>
+				<h3>What type of food is the recipe?(Breakfast, Main dish, Party, Side, Soup/Stew, or Sweet stuff)</h3>
 				<input type="text-box" ng-model="recipe.Type">
 
 				<button class="saveditrecipebtn" ng-click="editRecipe(recipe)">Save edits to recipe</button>
 			</section>	
-		</div>
-		<button class="deleterecipebtn" ng-click="deleterecipe(recipe)">Delete recipe</button>
-		<textarea class="thoseingredients" ng-model="recipe.ingredient"></textarea>
+		</div> -->
+		<button class="deleterecipebtn" ng-click="deleteRecipe(recipe)">Delete recipe</button>
+		<!-- <textarea class="thoseingredients" ng-model="recipe.ingredient"></textarea>
 		<button class="addingredientbtn" ng-click="addingredient(recipe)">Add ingredient</button>
-		<section class="recipe-ingredient" ng-repeat="ingredient in recipe.ingredients">{{ingredient}}</section>
+		<section class="recipe-ingredient" ng-repeat="ingredient in recipe.ingredients">{{ingredient}}</section> -->
 	</section>
 </div>
